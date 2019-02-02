@@ -40,16 +40,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const label = createElement('label', 'textContent', 'Confirmed');
     
     const checkbox = createElement('input', 'textContent', 'checkbox');
-    
     label.appendChild(checkbox);
     li.appendChild(label);
     
-    const editButton = createElement('button', 'textContent', 'edit');
-    
+    const editButton = createElement('button', 'textContent', 'edit'); 
     li.appendChild(editButton);
     
-    const removeButton = createElement('button');
-    removeButton.textContent = 'remove';
+    const removeButton = createElement('button', 'textContent', 'remove');
     li.appendChild(removeButton);
     return li; 
   }
