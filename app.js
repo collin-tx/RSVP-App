@@ -27,29 +27,25 @@ document.addEventListener('DOMContentLoaded', () => {
   
   function createLI(text) {
     function createElement(elementName, property, value) {
-       const element = document.createElement(elementName);
+       const element = documentcreateElement(elementName);
        element[property] = value;
        return element;
     }
     
+   function appendToLI(elementName, property, value) {
+    const element = createElement(elementName, property, value);    
+    li.appendChild(element);
+    return element;
+   }
+    
     const li = document.createElement('li');
-   
-    const span = createElement('span', 'textContent', text);    
-    li.appendChild(span);
-    
-    const label = createElement('label', 'textContent', 'Confirmed');
-    
-    const checkbox = createElement('input', 'textContent', 'checkbox');
-    label.appendChild(checkbox);
-    li.appendChild(label);
-    
-    const editButton = createElement('button', 'textContent', 'edit'); 
-    li.appendChild(editButton);
-    
-    const removeButton = createElement('button', 'textContent', 'remove');
-    li.appendChild(removeButton);
+    appendToLI('span', 'textContent', text);   
+    appendToLI('label', 'textContent', 'Confirmed')
+      .appendChild(createElement('input', 'type', 'checkbox'));
+    appendToLI('button', 'textContent', 'edit'); 
+    appendToLI('button', 'textContent', 'remove');
     return li; 
-  }
+}
   
   form.addEventListener('submit', (e) => {
     e.preventDefault();
@@ -64,7 +60,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const checked  = checkbox.checked;
     const listItem = checkbox.parentNode.parentNode;
     
-    if (check) {
+    if (checked) {
       listItem.className = 'responded';
     } else {
       listItem.className = '';
@@ -76,7 +72,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const button = e.target;
         const li = button.parentNode;
         const ul = li.parentNode;
-        if (button.textContent = 'remove') {
+        if (button.textContent === 'remove') {
           ul.removeChild(li);
         } else if (button.textContent === 'edit') {
           const span = li.firstElementChild;
@@ -93,10 +89,7 @@ document.addEventListener('DOMContentLoaded', () => {
           li.insertBefore(span, input);
           li.removeChild(input);
           button.textContent = 'edit';
-        }
-      
-      }
-    
-    });
+       }      
+    }
+  });
 });
-  
